@@ -1,58 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, {useEffect} from 'react'
+import tw from "tailwind-styled-components"
+import {Routes,  Route } from 'react-router-dom'
+import Home from './pages/Home'
+import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 
-function App() {
+import { useSelector, useDispatch} from 'react-redux'
+import { calculateTotals } from './features/shoppingcart/cart'
+import ProductDetails from './components/products/ProductDetails'
+import ProductCategory from './pages/ProductCategory'
+
+const App = () => {
+
+  const {cartItems} = useSelector( (store) => store.cart)
+  const dispatch = useDispatch()
+  
+   useEffect( () => {
+                         return () => {
+                         dispatch(calculateTotals());
+                        };
+                    }, [cartItems]
+             )
+    
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+    <HomeContainer>
+    <NavBar/>
+    <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/productCategory/:category" element={<ProductCategory/>} />
+        <Route path="/product/:id" element={<ProductDetails/>} />
+    </Routes>
+    <Footer/>
+    </HomeContainer>
+  )
 }
 
-export default App;
+export default App
+
+const HomeContainer = tw.div`
+  mt-0 flex flex-col min-h-screen w-screen  box-border  
+`;
