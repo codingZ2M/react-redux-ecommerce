@@ -172,6 +172,17 @@ const curatedProducts = [
             category: 'Watches',
             curatedProduct: true
           },
+          {
+            id: 'WAreRdx06',
+            title: 'Analog Black Silicone Strap Men Wrist Watch',
+            price: '32.99',
+            image: '/images/watches/watch06.jpg',
+            qty:1,
+            details: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged',
+            category: 'Watches',
+            curatedProduct: true
+          },
+          
   ];
   
   export default curatedProducts;
